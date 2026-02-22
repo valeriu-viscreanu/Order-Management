@@ -1,0 +1,31 @@
+@OrderManagement_HostAddress = http://localhost:5260
+
+GET {{OrderManagement_HostAddress}}/api/orders
+Accept: application/json
+
+###
+
+GET {{OrderManagement_HostAddress}}/api/orders/1
+Accept: application/json
+
+###
+
+POST {{OrderManagement_HostAddress}}/api/orders
+Content-Type: application/json
+
+{
+  "customerName": "Alice Wonder",
+  "orderDate": "2026-02-22T21:40:29",
+  "totalAmount": 99.99,
+  "items": [
+    {
+      "productName": "Keyboard",
+      "quantity": 1,
+      "unitPrice": 99.99
+    }
+  ]
+}
+
+###
+
+DELETE {{OrderManagement_HostAddress}}/api/orders/1

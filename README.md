@@ -53,5 +53,4 @@ A robust ASP.NET Core Web API for managing customer orders and their items using
 - **HTTP File**: Use `OrderManagement.http` inside VS Code / Visual Studio for integrated testing.
 - **Postman**: Import `OrderManagement.postman_collection.json` into Postman. Set the `baseUrl` variable to your running server (default: `http://localhost:5260`).
 
----
-Developed with ❤️ by Antigravity.
+

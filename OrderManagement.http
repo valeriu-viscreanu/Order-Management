@@ -1,31 +1,71 @@
 @OrderManagement_HostAddress = http://localhost:5260
+@orderId = f4816224-70d6-4491-ac52-34f298ace16f
+@itemId = d20882df-7fca-4ee8-88bb-37d2fc75e63f
 
+### Get All Orders
 GET {{OrderManagement_HostAddress}}/api/orders
 Accept: application/json
 
-###
-
-GET {{OrderManagement_HostAddress}}/api/orders/1
+### Get Order By ID
+GET {{OrderManagement_HostAddress}}/api/orders/{{orderId}}
 Accept: application/json
 
-###
-
+### Create Order
 POST {{OrderManagement_HostAddress}}/api/orders
 Content-Type: application/json
 
 {
-  "customerName": "Alice Wonder",
-  "orderDate": "2026-02-22T21:40:29",
-  "totalAmount": 99.99,
-  "items": [
-    {
-      "productName": "Keyboard",
-      "quantity": 1,
-      "unitPrice": 99.99
-    }
-  ]
+  "orderNumber": "ORD003",
+  "customerName": "Alice Johnson",
+  "orderDate": "2023-07-14T12:00:00Z",
+  "totalAmount": 120.0
 }
 
-###
+### Update Order
+PUT {{OrderManagement_HostAddress}}/api/orders/{{orderId}}
+Content-Type: application/json
 
-DELETE {{OrderManagement_HostAddress}}/api/orders/1
+{
+  "orderId": "{{orderId}}",
+  "orderNumber": "ORD001",
+  "customerName": "John Doe Updated",
+  "orderDate": "2023-07-14T10:30:00Z",
+  "totalAmount": 75.0
+}
+
+### Delete Order
+DELETE {{OrderManagement_HostAddress}}/api/orders/{{orderId}}
+
+
+### Get All Order Items
+GET {{OrderManagement_HostAddress}}/api/orders/{{orderId}}/items
+Accept: application/json
+
+### Get Order Item By ID
+GET {{OrderManagement_HostAddress}}/api/orders/{{orderId}}/items/{{itemId}}
+Accept: application/json
+
+### Add Order Item
+POST {{OrderManagement_HostAddress}}/api/orders/{{orderId}}/items
+Content-Type: application/json
+
+{
+  "productName": "Product C",
+  "quantity": 4,
+  "unitPrice": 8.0
+}
+
+### Update Order Item
+PUT {{OrderManagement_HostAddress}}/api/orders/{{orderId}}/items/{{itemId}}
+Content-Type: application/json
+
+{
+  "orderItemId": "{{itemId}}",
+  "orderId": "{{orderId}}",
+  "productName": "Product A Updated",
+  "quantity": 5,
+  "unitPrice": 10.0
+}
+
+### Delete Order Item
+DELETE {{OrderManagement_HostAddress}}/api/orders/{{orderId}}/items/{{itemId}}

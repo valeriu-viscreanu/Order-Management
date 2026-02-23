@@ -94,8 +94,6 @@ public class OrdersController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateOrder(Guid id, Order order)
     {
-        if (id != order.OrderId) return BadRequest();
-
         var existingOrder = await _context.Orders.FindAsync(id);
         if (existingOrder == null) return NotFound();
 
@@ -165,9 +163,9 @@ public class OrdersController : ControllerBase
     [HttpPut("{orderId}/items/{id}")]
     public async Task<IActionResult> UpdateOrderItem(Guid orderId, Guid id, OrderItem item)
     {
-        if (id != item.OrderItemId || orderId != item.OrderId) return BadRequest();
+        var existingItem = await _context.OrderItems
+            .FirstOrDefaultAsync(i => i.OrderId == orderId && i.OrderItemId == id);
 
-        var existingItem = await _context.OrderItems.FindAsync(id);
         if (existingItem == null) return NotFound();
 
         existingItem.ProductName = item.ProductName;
